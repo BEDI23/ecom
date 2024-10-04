@@ -1,4 +1,4 @@
-import 'package:ecom/Data/Providers/auth/loginProvider.dart';
+import 'package:ecom/Data/Providers/auth/newPasswordProvider.dart';
 import 'package:ecom/Utils/constants/colors.dart';
 import 'package:ecom/Utils/helpers/add1.dart';
 import 'package:ecom/Utils/helpers/add2.dart';
@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class NewPassword extends StatelessWidget {
+  const NewPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: ChangeNotifierProvider(
-          create: (_) => LoginProvider(),
-          child: Consumer<LoginProvider>(
-            builder: (context, loginProvider, child) {
+          create: (_) => NewPasswordProvider(),
+          child: Consumer<NewPasswordProvider>(
+            builder: (context, NewPasswordProvider, child) {
               return Column(
                 children: [
                   Stack(
@@ -43,7 +43,7 @@ class Login extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Connexion',
+                              'Nouveau',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w800,
                                 fontSize:
@@ -54,7 +54,7 @@ class Login extends StatelessWidget {
                                 height:
                                 MediaQuery.of(context).size.height * 0.01),
                             Text(
-                              'Connectez-vous pour continuer',
+                              'Entrez un nouveau mot de passe  ',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w300,
                                 fontSize:
@@ -73,18 +73,9 @@ class Login extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.05),
-                        _buildTextField(
-                          controller: loginProvider.emailController,
-                          hintText: 'Email',
-                          icon: Icons.email_outlined,
-                          validationMessage: 'Entrer votre email',
-                          context: context,
-                        ),
-                        SizedBox(
                             height: MediaQuery.of(context).size.height * 0.031),
                         _buildTextField(
-                          controller: loginProvider.passwordController,
+                          controller: NewPasswordProvider.newPasswordController,
                           hintText: 'Mot de passe',
                           icon: Icons.lock_outline_rounded,
                           validationMessage: 'Entrer votre mot de passe',
@@ -92,31 +83,20 @@ class Login extends StatelessWidget {
                           context: context,
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/mail');
-                              },
-                              child: Text(
-                                " Mot de passe oublier",
-                                style: GoogleFonts.poppins(
-                                  fontSize:
-                                  MediaQuery.of(context).size.width * 0.033,
-                                  fontWeight: FontWeight.w300,
-                                  color: TColors.red,
-                                ),
-                              ),
-                            ),
-                          ],
+                            height: MediaQuery.of(context).size.height * 0.031),
+                        _buildTextField(
+                          controller: NewPasswordProvider.confirmPasswordController,
+                          hintText: 'Confirmer votre mot de passe',
+                          icon: Icons.lock_outline_rounded,
+                          validationMessage: 'Confirmer votre mot de pass',
+                          isPassword: true,
+                          context: context,
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
+                            height: MediaQuery.of(context).size.height * 0.05),
                         GestureDetector(
                           onTap: () {
-                            loginProvider.login(context);
+                            NewPasswordProvider.updatePassword(context);
                           },
                           child: Container(
                             height: MediaQuery.of(context).size.height * 0.07,
@@ -155,36 +135,6 @@ class Login extends StatelessWidget {
                               ],
                             ),
                           ),
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Vous n'avez pas de compte ?",
-                              style: GoogleFonts.poppins(
-                                fontSize:
-                                MediaQuery.of(context).size.width * 0.030,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.black,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/register');
-                              },
-                              child: Text(
-                                " Enregistrez-vous",
-                                style: GoogleFonts.poppins(
-                                  fontSize:
-                                  MediaQuery.of(context).size.width * 0.033,
-                                  fontWeight: FontWeight.w300,
-                                  color: TColors.red,
-                                ),
-                              ),
-                            ),
-                          ],
                         ),
                       ],
                     ),

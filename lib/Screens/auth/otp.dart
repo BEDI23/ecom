@@ -1,4 +1,4 @@
-import 'package:ecom/Data/Providers/auth/loginProvider.dart';
+import 'package:ecom/Data/Providers/auth/otpProvider.dart';
 import 'package:ecom/Utils/constants/colors.dart';
 import 'package:ecom/Utils/helpers/add1.dart';
 import 'package:ecom/Utils/helpers/add2.dart';
@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class OtpPage extends StatelessWidget {
+  const OtpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: ChangeNotifierProvider(
-          create: (_) => LoginProvider(),
-          child: Consumer<LoginProvider>(
-            builder: (context, loginProvider, child) {
+          create: (_) => OtpProvider(),
+          child: Consumer<OtpProvider>(
+            builder: (context, otpProvider, child) {
               return Column(
                 children: [
                   Stack(
@@ -43,7 +43,7 @@ class Login extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Connexion',
+                              'Vérification OTP',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w800,
                                 fontSize:
@@ -54,7 +54,7 @@ class Login extends StatelessWidget {
                                 height:
                                 MediaQuery.of(context).size.height * 0.01),
                             Text(
-                              'Connectez-vous pour continuer',
+                              'Entrez le code reçu',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w300,
                                 fontSize:
@@ -74,49 +74,12 @@ class Login extends StatelessWidget {
                       children: [
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05),
-                        _buildTextField(
-                          controller: loginProvider.emailController,
-                          hintText: 'Email',
-                          icon: Icons.email_outlined,
-                          validationMessage: 'Entrer votre email',
-                          context: context,
-                        ),
+                        _buildOtpFields(context, otpProvider),
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.031),
-                        _buildTextField(
-                          controller: loginProvider.passwordController,
-                          hintText: 'Mot de passe',
-                          icon: Icons.lock_outline_rounded,
-                          validationMessage: 'Entrer votre mot de passe',
-                          isPassword: true,
-                          context: context,
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/mail');
-                              },
-                              child: Text(
-                                " Mot de passe oublier",
-                                style: GoogleFonts.poppins(
-                                  fontSize:
-                                  MediaQuery.of(context).size.width * 0.033,
-                                  fontWeight: FontWeight.w300,
-                                  color: TColors.red,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02),
+                            height: MediaQuery.of(context).size.height * 0.05),
                         GestureDetector(
                           onTap: () {
-                            loginProvider.login(context);
+                            otpProvider.verifyOtp(context);
                           },
                           child: Container(
                             height: MediaQuery.of(context).size.height * 0.07,
@@ -156,36 +119,6 @@ class Login extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Vous n'avez pas de compte ?",
-                              style: GoogleFonts.poppins(
-                                fontSize:
-                                MediaQuery.of(context).size.width * 0.030,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.black,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/register');
-                              },
-                              child: Text(
-                                " Enregistrez-vous",
-                                style: GoogleFonts.poppins(
-                                  fontSize:
-                                  MediaQuery.of(context).size.width * 0.033,
-                                  fontWeight: FontWeight.w300,
-                                  color: TColors.red,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -198,18 +131,26 @@ class Login extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField({
-    required BuildContext context,
-    required TextEditingController controller,
-    required String hintText,
-    required IconData icon,
-    required String validationMessage,
-    bool isPassword = false,
-  }) {
+  Widget _buildOtpFields(BuildContext context, OtpProvider otpProvider) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildOtpField(context, otpProvider.otpController1, otpProvider.otpFocusNode1, otpProvider.otpFocusNode2),
+        _buildOtpField(context, otpProvider.otpController2, otpProvider.otpFocusNode2, otpProvider.otpFocusNode3),
+        _buildOtpField(context, otpProvider.otpController3, otpProvider.otpFocusNode3, otpProvider.otpFocusNode4),
+        _buildOtpField(context, otpProvider.otpController4, otpProvider.otpFocusNode4, null),
+      ],
+    );
+  }
+
+  Widget _buildOtpField(BuildContext context, TextEditingController controller,
+      FocusNode currentFocus, FocusNode? nextFocus) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.059,
+      width: MediaQuery.of(context).size.width * 0.15,
+      height: MediaQuery.of(context).size.height * 0.08,
       decoration: BoxDecoration(
         color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
             offset: Offset(3, 3),
@@ -218,21 +159,26 @@ class Login extends StatelessWidget {
           ),
         ],
       ),
-      child: TextFormField(
+      child: TextField(
         controller: controller,
-        obscureText: isPassword,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return validationMessage;
+        keyboardType: TextInputType.number,
+        textAlign: TextAlign.center,
+        maxLength: 1,
+        focusNode: currentFocus,
+        onChanged: (value) {
+          if (value.length == 1) {
+            // Déplace le focus vers le champ suivant si disponible
+            if (nextFocus != null) {
+              FocusScope.of(context).requestFocus(nextFocus);
+            } else {
+              currentFocus.unfocus();
+            }
           }
-          return null;
         },
         decoration: InputDecoration(
           border: InputBorder.none,
-          contentPadding:
-          EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
-          prefixIcon: Icon(icon, color: TColors.darkGrey),
-          hintText: hintText,
+          counterText: "",
+          hintText: '*',
           hintStyle: TextStyle(color: TColors.darkGrey),
         ),
       ),

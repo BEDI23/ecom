@@ -1,6 +1,9 @@
 import 'package:ecom/Screens/Auth/Login.dart';
 import 'package:ecom/Screens/Auth/register.dart';
 import 'package:ecom/Screens/OnBoarding/OnBoarding.dart';
+import 'package:ecom/Screens/auth/newPassword.dart';
+import 'package:ecom/Screens/auth/otp.dart';
+import 'package:ecom/Screens/auth/sendMail.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,10 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/login': (context) => const Login(), // Page de connexion
-        '/register': (context) => const Register(), // Page de connexion
+        '/login': (context) => const Login(),
+        '/register': (context) => const Register(),
+        '/mail': (context) => const MailSend(),
+        '/otp': (context) => const OtpPage(),
+        '/newPassword': (context) => const NewPassword(),
       },
-      title: 'Flutter Demo',
+      title: 'E-com',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
