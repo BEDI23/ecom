@@ -110,7 +110,11 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           const ProductHeader(),
-          ProductGridView(products: ProductData.products,)
+          ProductGridView(
+              products: ProductData.products
+                  .where((product) => product.productCategoryId
+                      .contains(CategoryData.getSelectedCategory().categoryId))
+                  .toList())
         ],
       ),
     );
