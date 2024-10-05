@@ -1,6 +1,6 @@
 import 'package:ecom/Screens/Auth/Login.dart';
 import 'package:ecom/Screens/Auth/register.dart';
-import 'package:ecom/Screens/Home/welcome/welcome.dart';
+import 'package:ecom/Screens/Home/HomeScreen/welcome.dart';
 import 'package:ecom/Screens/OnBoarding/OnBoarding.dart';
 import 'package:ecom/Screens/auth/newPassword.dart';
 import 'package:ecom/Screens/auth/otp.dart';

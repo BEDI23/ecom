@@ -1,7 +1,12 @@
 import 'package:ecom/Common/Widgets/homeScreen/CustomAppBarButton.dart';
+import 'package:ecom/Data/Fixtures/category_fixture.dart';
+import 'package:ecom/Data/Fixtures/product_data.dart';
+import 'package:ecom/Screens/Home/HomeScreen/Search_field.dart';
+import 'package:ecom/Screens/Home/HomeScreen/category_chip.dart';
+import 'package:ecom/Screens/Home/HomeScreen/product_header.dart';
 import 'package:ecom/Screens/Home/Promo_Widger/promo_banner.dart';
 import 'package:ecom/Screens/Home/Promo_Widger/promo_carousel.dart';
-import 'package:ecom/Screens/Home/welcome/Search_field.dart';
+import 'package:ecom/Screens/Home/product_widget/product_grid_view.dart';
 import 'package:ecom/Utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -95,7 +100,17 @@ class _HomeScreenState extends State<HomeScreen> {
           PromoCarouselIndicator(
               promoBanners: promoBanners,
               carouselController: carouselController,
-              currentPromo: currentPromo)
+              currentPromo: currentPromo),
+          CategoryChip(
+            categories: CategoryData.categories,
+            onSelected: (category) {
+              setState(() {
+                CategoryData.setIsSelected(category.categoryId);
+              });
+            },
+          ),
+          const ProductHeader(),
+          ProductGridView(products: ProductData.products,)
         ],
       ),
     );
