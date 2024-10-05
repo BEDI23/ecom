@@ -1,6 +1,6 @@
+import 'package:ecom/Common/helpers/Image_OnBoarding.dart';
+import 'package:ecom/Common/helpers/text_OnBoarding.dart';
 import 'package:ecom/Utils/constants/colors.dart';
-import 'package:ecom/Utils/helpers/Image_OnBoarding.dart';
-import 'package:ecom/Utils/helpers/text_OnBoarding.dart';
 import 'package:flutter/material.dart';
 
 

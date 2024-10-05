@@ -1,5 +1,6 @@
 import 'package:ecom/Screens/Auth/Login.dart';
 import 'package:ecom/Screens/Auth/register.dart';
+import 'package:ecom/Screens/Home/welcome/welcome.dart';
 import 'package:ecom/Screens/OnBoarding/OnBoarding.dart';
 import 'package:ecom/Screens/auth/newPassword.dart';
 import 'package:ecom/Screens/auth/otp.dart';
@@ -19,13 +20,14 @@ class MyApp extends StatelessWidget {
         '/mail': (context) => const MailSend(),
         '/otp': (context) => const OtpPage(),
         '/newPassword': (context) => const NewPassword(),
+        '/home': (context) => const HomeScreen(),
       },
       title: 'E-com',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const OnBoarding(),
+      home: const HomeScreen(),
     );
   }
 }

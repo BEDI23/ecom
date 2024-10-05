@@ -1,7 +1,8 @@
+import 'package:ecom/Common/helpers/add1.dart';
+import 'package:ecom/Common/helpers/add2.dart';
 import 'package:ecom/Data/Providers/auth/otpProvider.dart';
 import 'package:ecom/Utils/constants/colors.dart';
-import 'package:ecom/Utils/helpers/add1.dart';
-import 'package:ecom/Utils/helpers/add2.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,20 @@ class OtpPage extends StatelessWidget {
                           size: Size(MediaQuery.of(context).size.width,
                               MediaQuery.of(context).size.height * 0.3),
                           painter: RPSCustomPainter2(),
+                        ),
+                      ),
+                      Positioned(
+                        top: MediaQuery.of(context).size.height * 0.07,
+                        left: MediaQuery.of(context).size.width * 0.06,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);  // Retour en arrière
+                          },
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: TColors.darkGrey,
+                            size: MediaQuery.of(context).size.width * 0.07,
+                          ),
                         ),
                       ),
                       Positioned(

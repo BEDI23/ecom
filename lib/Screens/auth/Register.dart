@@ -1,7 +1,7 @@
 import 'package:ecom/Data/Providers/auth/registerProvider%20.dart';
 import 'package:ecom/Utils/constants/colors.dart';
-import 'package:ecom/Utils/helpers/add1.dart';
-import 'package:ecom/Utils/helpers/add2.dart';
+import 'package:ecom/Common/helpers/add1.dart';
+import 'package:ecom/Common/helpers/add2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

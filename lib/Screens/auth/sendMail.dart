@@ -1,7 +1,7 @@
 import 'package:ecom/Data/Providers/auth/mailSendProvider.dart';
 import 'package:ecom/Utils/constants/colors.dart';
-import 'package:ecom/Utils/helpers/add1.dart';
-import 'package:ecom/Utils/helpers/add2.dart';
+import 'package:ecom/Common/helpers/add1.dart';
+import 'package:ecom/Common/helpers/add2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +16,7 @@ class MailSend extends StatelessWidget {
         child: ChangeNotifierProvider(
           create: (_) => mailSender(),
           child: Consumer<mailSender>(
-            builder: (context, mailSender, child) {
+            builder: (context, mailSender mailSender, child) {
               return Column(
                 children: [
                   Stack(
@@ -34,6 +34,20 @@ class MailSend extends StatelessWidget {
                           size: Size(MediaQuery.of(context).size.width,
                               MediaQuery.of(context).size.height * 0.3),
                           painter: RPSCustomPainter2(),
+                        ),
+                      ),
+                      Positioned(
+                        top: MediaQuery.of(context).size.height * 0.07,
+                        left: MediaQuery.of(context).size.width * 0.06,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);  // Retour en arrière
+                          },
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: TColors.darkGrey,
+                              size: MediaQuery.of(context).size.width * 0.07,
+                            ),
                         ),
                       ),
                       Positioned(
@@ -151,7 +165,7 @@ class MailSend extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            offset: Offset(3, 3),
+            offset: const Offset(3, 3),
             blurRadius: 6,
             color: Colors.grey.shade400,
           ),
@@ -172,7 +186,7 @@ class MailSend extends StatelessWidget {
           EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
           prefixIcon: Icon(icon, color: TColors.darkGrey),
           hintText: hintText,
-          hintStyle: TextStyle(color: TColors.darkGrey),
+          hintStyle: const TextStyle(color: TColors.darkGrey),
         ),
       ),
     );

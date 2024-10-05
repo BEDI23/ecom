@@ -36,7 +36,7 @@ class LoginProvider with ChangeNotifier {
     }
 
     // Si tout est correct, rediriger vers une autre page
-    Navigator.pushNamed(context, '/navbar');
+    Navigator.pushNamed(context, '/home');
   }
 
   void _showErrorSnackBar(BuildContext context, String message, IconData icon,
